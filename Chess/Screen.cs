@@ -4,6 +4,8 @@ using System.Text;
 using Chess.BoardLayer;
 using Chess.BoardLayer.Enums;
 using Chess.GameLayer;
+using System.Text.RegularExpressions;
+using Chess.BoardLayer.Exceptions;
 
 namespace Chess
 {
@@ -64,6 +66,11 @@ namespace Chess
         public static ChessPosition ReadPosition()
         {
             string str = Console.ReadLine();
+            Regex PosFormatCheck = new Regex("^[a-h]{1}[1-8]{1}$");
+            if (!PosFormatCheck.IsMatch(str))
+            {
+                throw new BoardException("Invalid position input! Correct format: one lowercase letter (a-h) and one number (1-8).");
+            }
             char col = str[0];
             int lin = int.Parse(str[1] + "");
             return new ChessPosition(col, lin);

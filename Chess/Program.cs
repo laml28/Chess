@@ -24,7 +24,8 @@ namespace Chess
                         Screen.PrintPlay(game, new bool[game.Board.Lines, game.Board.Columns]);
 
                         Console.Write("Initial position: ");
-                        Position initialPosition = Screen.ReadPosition().ToPosition();
+                        ChessPosition initialChessPosition = Screen.ReadPosition();
+                        Position initialPosition = initialChessPosition.ToPosition();
 
                         game.CheckInitialPosition(initialPosition);
                         bool[,] possibleMoves = game.Board.GetPiece(initialPosition).PossibleMoves();
